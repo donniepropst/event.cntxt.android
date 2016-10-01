@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">event.cntxt</string>
+    <string name="config_webapp_id">445637940103-45fhlv9h3jsnne98rsj5asp5p0sj9fca.apps.googleusercontent.com</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+</resources>

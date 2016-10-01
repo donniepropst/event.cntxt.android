@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "56393339507",
+    "firebase_url": "https://eventcontext-856be.firebaseio.com",
+    "project_id": "eventcontext-856be",
+    "storage_bucket": "eventcontext-856be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56393339507:android:9dbdcd4ccfddd440",
+        "android_client_info": {
+          "package_name": "hackathon.eventcntxt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56393339507-oef39ulnfmobkvsath0rif6lq4j9757m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAes4ELJSfHnObUieeP8eSsJ8XVsBejbkE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
