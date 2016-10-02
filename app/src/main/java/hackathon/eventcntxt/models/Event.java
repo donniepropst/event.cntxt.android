@@ -10,6 +10,7 @@ public class Event  extends RealmObject {
     private String datetime;
     private String creator;
     private String beacon;
+    private String address;
 
     public Event(){
 
@@ -22,6 +23,14 @@ public class Event  extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDatetime() {

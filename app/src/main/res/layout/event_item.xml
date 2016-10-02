@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lyft="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Event Name"
+        android:id="@+id/item_event_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Event address"
+        android:layout_below="@id/item_event_name"
+        android:id="@+id/item_event_address"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <com.lyft.lyftbutton.LyftButton
+        android:id="@+id/lyft_button"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/item_event_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        lyft:lyftStyle="lyftMulberryDark"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/lyft_button"
+        android:layout_height="2px"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="16dp">
+
+    </View>
+</RelativeLayout>

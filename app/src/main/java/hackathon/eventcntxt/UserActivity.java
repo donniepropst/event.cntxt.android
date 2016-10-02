@@ -92,7 +92,6 @@ public class UserActivity {
                 eventList.add(dataSnapshot.getValue(Event.class));
                 Event retrievedEvent = eventList.get(eventList.size()-1);
                 saveEvent(retrievedEvent);
-                System.out.println("EVENT!!1" + retrievedEvent.getName());
                 getCheckinBeaconData(retrievedEvent.getBeacon());
             }
 
@@ -110,7 +109,6 @@ public class UserActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                subscribedBeacons.add(dataSnapshot.getValue(Beacon.class));
                 Beacon beacon = subscribedBeacons.get(subscribedBeacons.size()-1);
-                System.out.println("BACON!!1" + beacon.getName());
                 saveBeacon(beacon);
             }
 
@@ -123,33 +121,15 @@ public class UserActivity {
 
     private void saveEvent(final Event event){
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(new Realm.Transaction(){
-            @Override
-            public void execute(Realm realm){
-                Event e = realm.createObject(Event.class);
-                e.setBeacon(event.getBeacon());
-                e.setCreator(event.getCreator());
-                e.setDatetime(event.getDatetime());
-                e.setName(event.getName());
-            }
-        });
+        realm.beginTransaction();
+        realm.copyToRealm(event);
+        realm.commitTransaction();
     }
     private void saveBeacon(final Beacon beacon){
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         realm.copyToRealm(beacon);
         realm.commitTransaction();
-       /* realm.executeTransaction(new Realm.Transaction(){
-            @Override
-            public void execute(Realm realm){
-                Beacon b = realm.createObject(Beacon.class);
-                b.setUuid(beacon.getUuid());
-                b.setMajor(beacon.getMajor());
-                b.setMinor(beacon.getMinor());
-                b.setName(beacon.getName());
-                b.setCreator(beacon.getCreator());
-            }
-        });*/
     }
 
 }

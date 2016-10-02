@@ -1,19 +1,22 @@
 package hackathon.eventcntxt;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.estimote.sdk.SystemRequirementsChecker;
-import com.google.firebase.auth.FirebaseAuth;
+
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import hackathon.eventcntxt.models.Beacon;
+import hackathon.eventcntxt.models.Event;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -25,6 +28,11 @@ import io.realm.RealmResults;
 
 public class HomeActivity extends AppCompatActivity {
     private Realm realm;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +40,24 @@ public class HomeActivity extends AppCompatActivity {
         SystemRequirementsChecker.checkWithDefaultDialogs(this);
         realm = Realm.getDefaultInstance();
         UserActivity ua = new UserActivity();
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setTitle("Just a moment.. ");
+        dialog.show();
         ua.getAllUserEvents();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 RealmResults<Beacon> res = realm.where(Beacon.class).findAll();
-                System.out.println("TOTAL BEACONS:"+ res.size());
+                RealmResults<Event> events = realm.where(Event.class).findAll();
+                ArrayList<Event> eventList = new ArrayList<Event>();
+                for(int i = 0; i < events.size(); i++){
+                    eventList.add(events.get(i));
+                }
+                dialog.hide();
                 startService();
-               startService();
+                configureRecyclerView(eventList);
+
             }
         }, 5000);
     }
@@ -53,4 +70,22 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(this, "Service Not Running", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void configureRecyclerView(ArrayList<Event> list){
+        mRecyclerView = (RecyclerView) findViewById(R.id.home_event_list);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new EventAdapter(list, this);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+
 }

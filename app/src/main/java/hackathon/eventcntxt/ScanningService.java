@@ -49,6 +49,7 @@ public class ScanningService extends Service {
         final RealmResults<Beacon> res = realm.where(Beacon.class).findAll();
         final RealmResults<Event> events = realm.where(Event.class).findAll();
         final Beacon first = res.get(0);
+        final Event event = events.get(0);
         System.out.println("UUID: " + first.getUuid());
         System.out.println("OBJ: " + first.toString());
             if(first != null) {
@@ -69,9 +70,8 @@ public class ScanningService extends Service {
                     @Override
                     public void onEnteredRegion(Region region, List<com.estimote.sdk.Beacon> list) {
                         inRange = true;
-                        new CheckInEmitter(region.getProximityUUID().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()).emit();
-
-                        showNotification("Event - Check In", "Success");
+                        new CheckInEmitter(region.getProximityUUID().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()).getEventKey(event.getName());
+                        showNotification("Event - Check In", "Click here to show proper check in", true);
                     }
 
                     @Override
@@ -86,8 +86,13 @@ public class ScanningService extends Service {
 
     }
 
-    public void showNotification( String title, String message) {
-        Intent notifyIntent = new Intent(this, HomeActivity.class);
+    public void showNotification( String title, String message, boolean isCheckin) {
+        Intent notifyIntent;
+        if(isCheckin)
+            notifyIntent = new Intent(this, CheckInActivity.class);
+        else
+            notifyIntent = new Intent(this, HomeActivity.class);
+
         notifyIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
                 new Intent[] { notifyIntent }, PendingIntent.FLAG_UPDATE_CURRENT);

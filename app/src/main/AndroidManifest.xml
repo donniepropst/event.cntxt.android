@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".HomeActivity">
         </activity>
+        <activity android:name=".CheckInActivity">
+        </activity>
         <service android:name =".ScanningService" />
     </application>
 
