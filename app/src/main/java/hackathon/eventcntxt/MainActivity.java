@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import io.realm.Realm;
+
 
 public class MainActivity extends AppCompatActivity {
 

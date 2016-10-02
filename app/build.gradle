@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 24
@@ -35,7 +36,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
 
-    compile 'io.michaelrocks:callmemaybe:1.2.4'
+    compile 'com.estimote:sdk:0.13.0@aar'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
